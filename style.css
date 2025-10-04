@@ -16,6 +16,12 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+body.dark {
+    background: #121212;
+    color: #ffffff;
 }
 
 main {
@@ -37,6 +43,10 @@ section{
 a{
 	text-decoration: none;
 	color: #0e2045;
+}
+
+body.dark a {
+    color: #fff;
 }
 
 .container{
@@ -71,6 +81,11 @@ a{
     margin: 2px;
 }
 
+body.dark .tools-btn {
+    background-color: #333;
+    color: #fff;
+}
+
 .tools-btn:hover {
     background-color: #eaeaea;
 }
@@ -87,6 +102,10 @@ a{
     border-top-right-radius: 8px;
 }
 
+body.dark .tools-area {
+    background-color: #1e1e1e;
+}
+
 .txt-area .text {
     width: 100%;
     height: 400px;
@@ -98,10 +117,27 @@ a{
     background-color: #fff;
     outline: none;
     padding: 10px 12px 10px 12px;
+    color: inherit;
+}
+
+body.dark .txt-area .text {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #fff;
+}
+
+.counter {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: gray;
+}
+
+body.dark .counter {
+    color: #ccc;
 }
 
 /* Ashish Credits */
-
 .ashish-credits {
     background-color: #fff;
     border: 2px solid #e7e9eb;
@@ -119,13 +155,13 @@ a{
     right: 1rem;
 }
 
-.ashish-credits .icon {
-    color: #8710d8
+body.dark .ashish-credits {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #fff;
 }
 
-
 /* Making the Website Responsive */
-
 @media (max-width: 1000px){
 	.container{
 		margin: 0 auto;

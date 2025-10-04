@@ -1,73 +1,72 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const boldButton = document.getElementById("bold");
-  const underlineButton = document.getElementById("underline");
-  const italicButton = document.getElementById("italic");
-  const strikethroughButton = document.getElementById("strikethrough");
-  const justifyRightButton = document.getElementById("justifyRight");
-  const justifyLeftButton = document.getElementById("justifyLeft");
-  const justifyCenterButton = document.getElementById("justifyCenter");
-  const justifyFullButton = document.getElementById("justifyFull");
-  const unorderedListButton = document.getElementById("unorderedList");
-  const increaseFontSizeButton = document.getElementById("increaseFontSize");
-  const decreaseFontSizeButton = document.getElementById("decreaseFontSize");
-  const copyButton = document.getElementById("copyBtn");
-  const resetButton = document.getElementById("resetBtn");
+  const text = document.getElementById("text");
+  const counter = document.getElementById("counter");
+  const darkModeBtn = document.getElementById("darkModeBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
 
-  boldButton.addEventListener("click", function () {
-    document.execCommand("bold", false, null);
+  // Formatting buttons
+  const buttons = [
+    "bold", "italic", "underline", "strikethrough",
+    "justifyLeft", "justifyRight", "justifyCenter", "justifyFull",
+    "unorderedList", "increaseFontSize", "decreaseFontSize",
+    "copyBtn", "resetBtn"
+  ];
+
+  buttons.forEach(id => {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+      switch (id) {
+        case "bold": document.execCommand("bold"); break;
+        case "italic": document.execCommand("italic"); break;
+        case "underline": document.execCommand("underline"); break;
+        case "strikethrough": document.execCommand("strikethrough"); break;
+        case "justifyLeft": document.execCommand("justifyLeft"); break;
+        case "justifyRight": document.execCommand("justifyRight"); break;
+        case "justifyCenter": document.execCommand("justifyCenter"); break;
+        case "justifyFull": document.execCommand("justifyFull"); break;
+        case "unorderedList": document.execCommand("insertUnorderedList"); break;
+        case "increaseFontSize":
+          text.style.fontSize = (parseInt(getComputedStyle(text).fontSize) + 1) + "px";
+          break;
+        case "decreaseFontSize":
+          text.style.fontSize = (parseInt(getComputedStyle(text).fontSize) - 1) + "px";
+          break;
+        case "copyBtn":
+          navigator.clipboard.writeText(text.innerText);
+          break;
+        case "resetBtn":
+          text.innerHTML = "";
+          updateCounts();
+          break;
+      }
+    });
   });
 
-  italicButton.addEventListener("click", function () {
-    document.execCommand("italic", false, null);
+  // 🟢 Word & Character Count
+  function updateCounts() {
+    const content = text.innerText.trim();
+    const words = content.length ? content.split(/\s+/).length : 0;
+    const chars = content.length;
+    counter.textContent = `Words: ${words} | Characters: ${chars}`;
+  }
+
+  text.addEventListener("input", updateCounts);
+  updateCounts();
+
+  // 🌙 Dark Mode Toggle
+  darkModeBtn.addEventListener("click", function () {
+    document.body.classList.toggle("dark");
   });
 
-  underlineButton.addEventListener("click", function () {
-    document.execCommand("underline", false, null);
+  // 💾 Download as .txt
+  downloadBtn.addEventListener("click", function () {
+    const content = text.innerText;
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "text-editor-content.txt";
+    link.click();
   });
-
-  strikethroughButton.addEventListener("click", function () {
-    document.execCommand("strikethrough", false, null);
-  });
-
-  justifyRightButton.addEventListener("click", function () {
-    document.execCommand("justifyRight", false, null);
-  });
-
-  justifyLeftButton.addEventListener("click", function () {
-    document.execCommand("justifyLeft", false, null);
-  });
-
-  justifyCenterButton.addEventListener("click", function () {
-    document.execCommand("justifyCenter", false, null);
-  });
-
-  justifyFullButton.addEventListener("click", function () {
-    document.execCommand("justifyFull", false, null);
-  });
-
-  unorderedListButton.addEventListener("click", function () {
-    document.execCommand("insertUnorderedList", false, null);
-  });
-
-  increaseFontSizeButton.addEventListener("click", function () {
-    const currentSize = parseInt(getComputedStyle(text).fontSize, 10);
-    text.style.fontSize = (currentSize + 1) + "px";
-  });
-
-  decreaseFontSizeButton.addEventListener("click", function () {
-    const currentSize = parseInt(getComputedStyle(text).fontSize, 10);
-    text.style.fontSize = (currentSize - 1) + "px";
-  });
-
-  copyButton.addEventListener("click", function () {
-    const allText = text.innerText;
-    if (allText) {
-        navigator.clipboard.writeText(allText);
-    }
-});
-
-  resetButton.addEventListener("click", function () {
-    text.innerHTML = "";
-  });
-
 });
