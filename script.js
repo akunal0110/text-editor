@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const text = document.getElementById("text");
   const darkModeBtn = document.getElementById("darkModeBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
 
   // Formatting buttons
   const buttons = [
@@ -44,5 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // 🌙 Dark Mode Toggle
   darkModeBtn.addEventListener("click", function () {
     document.body.classList.toggle("dark");
+  });
+
+  // 💾 Download as .txt
+  downloadBtn.addEventListener("click", function () {
+    const content = text.innerText;
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "text-editor-content.txt";
+    link.click();
   });
 });
