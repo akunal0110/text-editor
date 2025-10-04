@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const text = document.getElementById("text");
+  const counter = document.getElementById("counter");
   const darkModeBtn = document.getElementById("darkModeBtn");
   const downloadBtn = document.getElementById("downloadBtn");
 
@@ -37,10 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         case "resetBtn":
           text.innerHTML = "";
+          updateCounts();
           break;
       }
     });
   });
+
+  // 🟢 Word & Character Count
+  function updateCounts() {
+    const content = text.innerText.trim();
+    const words = content.length ? content.split(/\s+/).length : 0;
+    const chars = content.length;
+    counter.textContent = Words: ${words} | Characters: ${chars};
+  }
+
+  text.addEventListener("input", updateCounts);
+  updateCounts();
 
   // 🌙 Dark Mode Toggle
   darkModeBtn.addEventListener("click", function () {
