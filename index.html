@@ -25,14 +25,22 @@
         
         <button id="copyBtn" class="tools-btn"><i class="fa-regular fa-clipboard"></i></button>
         <button id="resetBtn" class="tools-btn"><i class="fa-solid fa-rotate-right"></i></button>
-        <!-- New Buttons -->
         <button id="downloadBtn" class="tools-btn"><i class="fa-solid fa-download"></i></button>
         <button id="darkModeBtn" class="tools-btn"><i class="fa-solid fa-moon"></i></button>
+
+        <!--  New Feature Buttons -->
+        <button id="toggleWrapBtn" class="tools-btn"><i class="fa-solid fa-text-width"></i></button>
+    </div>
+
+    <!--  Find & Replace Section -->
+    <div class="find-replace" style="margin: 10px 0; text-align:center;">
+        <input type="text" id="findText" placeholder="Find..." style="padding:5px;">
+        <input type="text" id="replaceText" placeholder="Replace with..." style="padding:5px;">
+        <button id="replaceBtn" style="padding:5px 10px;">Replace All</button>
     </div>
 
     <div class="txt-area">
         <div contentEditable class="text" id="text" placeholder="Start typing your text..."></div>
-        <!-- Counter Section -->
         <div id="counter" class="counter">Words: 0 | Characters: 0</div>
     </div>
 </main>
@@ -49,3 +57,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+
